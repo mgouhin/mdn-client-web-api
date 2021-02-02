@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping list example</title>
+  <style>
+    li {
+      margin-bottom: 10px;
+    }
+
+    li button {
+      font-size: 8px;
+      margin-left: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>My shopping list</h1>
+
+  <div>
+    <label for="item">Enter a new item:</label>
+    <input type="text" name="item" id="item">
+    <button>Add item</button>
+  </div>
+
+  <ul>
+
+  </ul>
+
+  <script>
+    const inputText = document.querySelector('input');
+    const inputBtn = document.querySelector('div > button');
+    const list = document.querySelector('ul');
+
+    function addItem() {
+      // create new list item
+      let newListItem = document.createElement('li');
+      let newListValue = document.createElement('span');
+      newListValue.textContent = inputText.value;
+      newListItem.appendChild(newListValue);
+
+      // create and add a delete button
+      let deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', (e) => {
+        deleteBtn.parentElement.remove();
+      });
+      newListItem.appendChild(deleteBtn);
+
+      list.appendChild(newListItem);
+
+      // clear input and refocus the user
+      inputText.value = '';
+      inputText.focus();
+    }
+
+    inputBtn.addEventListener('click', addItem);
+    inputText.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        inputText.value = inputText.value.trim();
+        addItem();
+      }
+    });
+
+    inputText.value = '';
+    inputText.focus();
+  </script>
+</body>
+
+</html>

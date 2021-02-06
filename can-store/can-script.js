@@ -168,6 +168,20 @@ function initialize() {
   function fetchBlob(product) {
     // construct the URL path to the image file from the product.image property
     var url = 'images/' + product.image;
+
+    var blobRequest = new XMLHttpRequest();
+    blobRequest.open('GET', url);
+    blobRequest.responseType = 'blob';
+    blobRequest.onload = function () {
+      if (blobRequest.status === 200) {
+        var objectURL = URL.createObjectURL(blobRequest.response);
+        showProduct(objectURL, product);
+      } else {
+        console.log(`Network request for ${product.name} failed, ${blobRequest.status}: ${blobRequest.statusText}`);
+      }
+    };
+    blobRequest.send();
+    /* REPLACING FETCH WITH XHR
     // Use fetch to fetch the image, and convert the resulting response to a blob
     // Again, if any errors occur we report them in the console.
     fetch(url).then(function (response) {
@@ -182,7 +196,7 @@ function initialize() {
       } else {
         console.log('Network request for "' + product.name + '" image failed with response ' + response.status + ': ' + response.statusText);
       }
-    });
+    });*/
   }
 
   // Display a product inside the <main> element

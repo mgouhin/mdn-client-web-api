@@ -169,6 +169,8 @@ function initialize() {
     // construct the URL path to the image file from the product.image property
     var url = 'images/' + product.image;
 
+    // creates a new XHR request for product image, on successful response
+    // creates a URL and passes it to the showProduct function
     var blobRequest = new XMLHttpRequest();
     blobRequest.open('GET', url);
     blobRequest.responseType = 'blob';

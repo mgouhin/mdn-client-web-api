@@ -97,10 +97,18 @@ function windForward() {
 }
 
 function setTime() {
-  let minutes = Math.floor(media.currentTime / 60);
+  let hours = Math.floor(media.currentTime / 3600);
+  let minutes = Math.floor((media.currentTime - hours * 3600) / 60);
   let seconds = Math.floor(media.currentTime - minutes * 60);
+  let hourValue;
   let minuteValue;
   let secondValue;
+
+  if (hours < 10) {
+    hourValue = '0' + hours;
+  } else {
+    hourValue = hours;
+  }
 
   if (minutes < 10) {
     minuteValue = '0' + minutes;
@@ -114,7 +122,7 @@ function setTime() {
     secondValue = seconds;
   }
 
-  let mediaTime = minuteValue + ':' + secondValue;
+  let mediaTime = hourValue + ':' + minuteValue + ':' + secondValue;
   timer.textContent = mediaTime;
 
   let barLength = timeWrapper.clientWidth * (media.currentTime / media.duration);

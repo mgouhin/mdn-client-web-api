@@ -21,7 +21,9 @@ stop.addEventListener('click', stopMedia);
 media.addEventListener('ended', stopMedia);
 rwd.addEventListener('click', mediaBackward);
 fwd.addEventListener('click', mediaForward);
+timeWrapper.addEventListener('click', modifyTime);
 
+media.addEventListener('click', playPauseMedia);
 media.addEventListener('timeupdate', setTime);
 
 function playPauseMedia() {
@@ -127,4 +129,8 @@ function setTime() {
 
   let barLength = timeWrapper.clientWidth * (media.currentTime / media.duration);
   timerBar.style.width = barLength + 'px';
+}
+
+function modifyTime(e) {
+
 }

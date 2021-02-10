@@ -131,6 +131,18 @@ function setTime() {
   timerBar.style.width = barLength + 'px';
 }
 
+/* Event handler for timeWrapper. Calculates clicked 
+   position as a ratio of full duration and sets the
+   current play time. */
 function modifyTime(e) {
+  let clickXPos = e.x;
+  let timeWrapperBoundRect = timeWrapper.getBoundingClientRect();
+  let timeWrapperXStart = timeWrapperBoundRect.left;
+  let timeWrapperXEnd = timeWrapperBoundRect.right;
 
+  let playRatio = (clickXPos - timeWrapperXStart) /
+    (timeWrapperXEnd - timeWrapperXStart);
+  let setTime = Math.floor(playRatio * media.duration);
+
+  media.currentTime = setTime;
 }
